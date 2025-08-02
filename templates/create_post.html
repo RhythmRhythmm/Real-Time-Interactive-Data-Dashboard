@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if is_edit %}Edit Post{% else %}Create Post{% endif %}{% endblock %}
+
+{% block content %}
+<section class="container mx-auto px-6 md:px-8 py-16 animated-section">
+    <div class="bg-slate-800 p-10 rounded-2xl shadow-xl w-full max-w-3xl mx-auto border-2 border-slate-700">
+        <h2 class="text-3xl font-bold text-center mb-6 text-sky-400">{% if is_edit %}Edit Post{% else %}Create New Post{% endif %}</h2>
+        <form action="{% if is_edit %}{{ url_for('edit_post', post_id=post.id) }}{% else %}{{ url_for('create_post') }}{% endif %}" method="POST" class="space-y-4">
+            <div>
+                <label for="title" class="block text-lg font-semibold mb-2">Title</label>
+                <input type="text" id="title" name="title" required value="{{ post.title if is_edit else '' }}"
+                       class="w-full p-3 rounded-lg bg-slate-900 text-white border border-slate-700
+                              focus:outline-none focus:ring-2 focus:ring-sky-400">
+            </div>
+            <div>
+                <label for="content" class="block text-lg font-semibold mb-2">Content</label>
+                <textarea id="content" name="content" rows="10" required
+                          class="w-full p-3 rounded-lg bg-slate-900 text-white border border-slate-700
+                                 focus:outline-none focus:ring-2 focus:ring-sky-400">{{ post.content if is_edit else '' }}</textarea>
+            </div>
+            <div>
+                <label for="tags" class="block text-lg font-semibold mb-2">Tags (comma-separated)</label>
+                <input type="text" id="tags" name="tags" value="{{ post.tags if is_edit else '' }}"
+                       class="w-full p-3 rounded-lg bg-slate-900 text-white border border-slate-700
+                              focus:outline-none focus:ring-2 focus:ring-sky-400">
+            </div>
+            <div>
+                <label for="thumbnail" class="block text-lg font-semibold mb-2">Thumbnail Image URL</label>
+                <input type="url" id="thumbnail" name="thumbnail" value="{{ post.thumbnail if is_edit else '' }}"
+                       class="w-full p-3 rounded-lg bg-slate-900 text-white border border-slate-700
+                              focus:outline-none focus:ring-2 focus:ring-sky-400">
+            </div>
+            <button type="submit" class="w-full p-3 rounded-full bg-sky-500 text-white font-bold text-lg
+                                         hover:bg-sky-600 transition-colors duration-300
+                                         transform hover:scale-105 active:scale-95">
+                {% if is_edit %}Update Post{% else %}Publish Post{% endif %}
+            </button>
+        </form>
+    </div>
+</section>
+{% endblock %}

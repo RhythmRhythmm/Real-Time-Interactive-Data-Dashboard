@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <!-- Marquee Section -->
+    <div class="w-full bg-slate-800 py-4 overflow-hidden mt-8 animated-section" style="animation-delay: 0.2s;">
+        <div class="marquee-content whitespace-nowrap text-xl md:text-2xl font-bold text-sky-300">
+            &nbsp;&nbsp;&nbsp;Welcome to the Dynamic Blog. Share your stories and ideas with the world.
+            &nbsp;&nbsp;&nbsp;Welcome to the Dynamic Blog. Share your stories and ideas with the world.
+            &nbsp;&nbsp;&nbsp;Welcome to the Dynamic Blog. Share your stories and ideas with the world.
+        </div>
+    </div>
+    <style>
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        .marquee-content {
+            animation: marquee 25s linear infinite;
+        }
+    </style>
+
+    <!-- Hero Section -->
+    <header class="container mx-auto px-6 md:px-8 py-24 text-center animated-section" style="animation-delay: 0.4s;">
+        <h1 class="text-4xl md:text-6xl font-extrabold leading-tight">
+            Explore <span class="text-sky-400">Amazing Stories</span>
+        </h1>
+        <p class="mt-4 text-lg md:text-xl text-slate-300 max-w-3xl mx-auto">
+            Discover articles, tutorials, and creative works from our community of writers.
+        </p>
+    </header>
+
+    <!-- Blog Posts Feed -->
+    <section class="container mx-auto px-6 md:px-8 py-16 animated-section" style="animation-delay: 0.6s;">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">Latest Posts</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for post in posts %}
+            <a href="{{ url_for('view_post', post_id=post.id) }}" class="block bg-slate-800 p-8 rounded-2xl shadow-xl border-2 border-slate-700
+                        transform transition-transform duration-300 hover:scale-105 hover:bg-slate-700 group">
+                <img src="{{ post.thumbnail }}" alt="Post thumbnail" class="rounded-lg mb-4 w-full h-48 object-cover">
+                <h3 class="text-2xl font-bold mb-2 text-sky-400 group-hover:underline">{{ post.title }}</h3>
+                <p class="text-sm text-slate-400 mb-4">By <span class="text-white">{{ post.author.username }}</span> on {{ post.date_posted.strftime('%B %d, %Y') }}</p>
+                <p class="text-slate-300 line-clamp-3">
+                    {{ post.content[:150] }}...
+                </p>
+            </a>
+            {% else %}
+            <p class="col-span-full text-center text-xl text-slate-400">No posts found.</p>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
