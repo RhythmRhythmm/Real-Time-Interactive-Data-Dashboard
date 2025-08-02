@@ -1,0 +1,237 @@
+/* CSS Variables for color scheme */
+:root {
+    --navy-dark: #0A192F;
+    --navy-light: #1A2B42;
+    --white: #F0F4F8;
+    --gray-light: #A3B1C2;
+    --accent-blue: #66CCFF;
+    --card-bg: #1A2B42;
+    --card-border: #2C3E50;
+    --highlight: #E6E6FF;
+}
+
+/* Basic Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--navy-dark);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background-color 0.5s ease;
+    position: relative;
+}
+
+/* --- Custom Cursor Trail --- */
+.cursor-trail {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: var(--accent-blue);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    transition: width 0.2s ease, height 0.2s ease, opacity 0.5s ease;
+}
+
+.cursor-trail.visible {
+    opacity: 0.8;
+    width: 20px;
+    height: 20px;
+}
+
+/* --- Marquee Animation --- */
+.marquee-container {
+    width: 100%;
+    background-color: var(--navy-light);
+    padding: 8px 0;
+    overflow: hidden;
+    border-bottom: 2px solid var(--card-border);
+    white-space: nowrap;
+}
+
+.marquee-text {
+    display: inline-block;
+    animation: marquee 20s linear infinite;
+    font-weight: bold;
+    color: var(--accent-blue);
+}
+
+@keyframes marquee {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+
+/* --- Layout & Responsiveness --- */
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+    animation: fadeInDown 1s ease-out;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--white);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.header p {
+    font-size: 1rem;
+    color: var(--gray-light);
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1s ease-out;
+}
+
+.controls label {
+    font-weight: 700;
+    color: var(--white);
+}
+
+.controls select, .controls button {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+    font-family: inherit;
+    background-color: var(--navy-dark);
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.controls select:focus, .controls button:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+    box-shadow: 0 0 0 2px rgba(102, 204, 255, 0.5);
+}
+
+.controls button {
+    background-color: var(--accent-blue);
+    border: none;
+    color: var(--navy-dark);
+    font-weight: 700;
+}
+
+.controls button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 204, 255, 0.4);
+}
+
+/* --- Insight Cards --- */
+.insights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.insight-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    animation: fadeIn 1s ease-out;
+    position: relative;
+}
+
+.insight-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+.insight-card .icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent-blue);
+}
+
+.insight-card .title {
+    font-size: 0.9rem;
+    color: var(--gray-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.25rem;
+}
+
+.insight-card .value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* --- Charts Container --- */
+.charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.chart-container {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1.5s ease-out;
+    height: 400px; /* Fixed height for charts */
+}
+
+/* --- Animations --- */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Footer --- */
+.footer {
+    margin-top: 2rem;
+    text-align: center;
+    color: var(--gray-light);
+    padding: 1rem 0;
+    border-top: 1px solid var(--card-border);
+    animation: fadeInUp 1.5s ease-out;
+}

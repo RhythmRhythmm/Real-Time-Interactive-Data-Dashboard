@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Data Dashboard</title>
+    <!-- Use a modern font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Link to the separate CSS file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- This element will follow the cursor -->
+    <div class="cursor-trail"></div>
+
+    <!-- Marquee container -->
+    <div class="marquee-container">
+        <span class="marquee-text">Dashboard Status: All systems operational. Data last updated: 2024-05-20. 🚀</span>
+    </div>
+
+    <div class="dashboard-container">
+        <!-- Dashboard Header -->
+        <header class="header">
+            <h1>Interactive Data Dashboard</h1>
+            <p>Real-time insights and data visualization for public datasets.</p>
+        </header>
+
+        <!-- Control Panel for Filters -->
+        <section class="controls">
+            <div class="form-group">
+                <label for="dataset-select">Select Dataset:</label>
+                <select id="dataset-select">
+                    <option value="covid" selected>COVID-19 Data</option>
+                    <option value="crypto">Crypto Prices</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="filter-select">Filter by:</label>
+                <select id="filter-select">
+                    <option value="all" selected>All</option>
+                    <!-- Options will be populated by JS -->
+                </select>
+            </div>
+            <button id="apply-filter-btn">Apply Filters</button>
+        </section>
+
+        <!-- Insight Cards Grid -->
+        <section class="insights-grid" id="insights-grid"></section>
+
+        <!-- Charts Grid -->
+        <section class="charts-grid">
+            <div class="chart-container">
+                <canvas id="main-chart"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="secondary-chart"></canvas>
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Dynamic Dashboard Project. Built with HTML, CSS, and JavaScript.</p>
+    </footer>
+
+    <!-- Link to the separate JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
